@@ -1,0 +1,56 @@
+.tabak {
+    position: relative;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center; /* İçeriği yatayda ortala */
+}
+
+.tabak h3 {
+    margin-top: 0; /* H3 başlığının varsayılan üst boşluğunu kaldır */
+}
+
+.menu {
+    background-color: #444;
+    color: #fff;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.yemekler {
+    position: relative; /* Yemekler div'i için position belirtilmeli */
+    width: 600px;
+    height: 600px;
+}
+
+.yemekler img {
+    width: 200px;
+    margin: 5px;
+    position: absolute;
+    z-index: 1;
+}
+
+.tabak-resim {
+    position: absolute;
+    z-index: 0;
+    width: 600px;
+    left: 50%; /* Tabak resmini yatayda ortala */
+    transform: translateX(-50%); /* Tabak resmini yatayda ortala */
+}
+
+.yemek-resim {
+    width: 100px;
+    margin: 5px;
+    position: absolute;
+    z-index: 1;
+}
+
+.list-group-item {
+    background-color: #555;
+    color: #fff;
+}
+
+.container {
+    text-align: center; /* Sayfa içeriğini yatayda ortala */
+}

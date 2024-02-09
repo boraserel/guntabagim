@@ -36,21 +36,32 @@ $(document).ready(function() {
       $('#yemekler').append(img);
     });
   
-    $(document).on('mousemove', function(event) {
+    $(yemekler).on('mousemove', function(event) {
       console.log('mousemove');
       $('.yemek-resim').each(function() {
-        if ($(this).data('selected') === "true" && moveSwitch) {
-            var x = event.pageX - ($(this).width() / 2);
-            var y = event.pageY - ($(this).height() / 2);
-            $(this).css({
-                'left': x-412 + 'px',
-                'top': y-100 + 'px'
-            });
-        }
-    });
+          if ($(this).data('selected') === "true" && moveSwitch) {
+              var x = event.pageX - ($(this).width() / 2);
+              var y = event.pageY - ($(this).height() / 2);
+              
+              // Tabağın sınırlarını hesapla
+              var tabakLeft = $('#tabak').offset().left;
+              var tabakTop = $('#tabak').offset().top;
+              var tabakRight = tabakLeft + $('#tabak').width();
+              var tabakBottom = tabakTop + $('#tabak').height();
+              
+              // Yeni pozisyonu kontrol et
+              var newX = x - 412;
+              var newY = y - 100;
+              if (true||newX >= tabakLeft && newX <= tabakRight && newY >= tabakTop && newY <= tabakBottom) {
+                  $(this).css({
+                      'left': newX + 'px',
+                      'top': newY + 'px'
+                  });
+              }
+          }
+      });
+  });
 
-    });
-  
     $('#yemekler').on('click', '.yemek-resim', function(event) {
       event.stopPropagation(); // İçeriğe tıklamada yukarıya tıklamayı tetikleme
   
@@ -68,7 +79,14 @@ $(document).ready(function() {
         $('#selected-item-text').html($(this).attr('alt'));
     }
     });
-    
+    $("#delete").click(function() {
+      $('.yemek-resim').each(function() {
+        if ($(this).data('selected') === "true") {
+          var selectedImage = $(this);
+          selectedImage.remove();
+        }
+    });
+    });
     $("#move").click(function() {
       if(moveSwitch == false){
         moveSwitch = true;

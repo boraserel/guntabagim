@@ -76,6 +76,8 @@ $(document).ready(function() {
     } else {
         $(this).css('border', '1px solid green');
         $(this).data('selected', "true");
+        $('.yemek-resim').not($(this)).css('border', 'none');
+        $('.yemek-resim').not($(this)).data('selected', "false");
         $('#selected-item-text').html($(this).attr('alt'));
     }
     });

@@ -1,5 +1,26 @@
 $(document).ready(function() {
+  var moveSwitch = false;
+      $("#en-azalt").click(function() {
+        $('.yemek-resim').each(function() {
+          if ($(this).data('selected') === "true") {
+            var selectedImage = $(this);
+            var currentWidth = selectedImage.width();
+            selectedImage.width(currentWidth - 10); // 10 piksel azalt
+          }
+      });
+       
+    });
 
+    // En'i arttır butonuna tıklanınca
+    $("#en-arttir").click(function() {
+      $('.yemek-resim').each(function() {
+        if ($(this).data('selected') === "true") {
+          var selectedImage = $(this);
+          var currentWidth = selectedImage.width();
+          selectedImage.width(currentWidth + 10); // 10 piksel azalt
+        }
+    });
+    });
     // Yemekler listesinden yemek ismine tıklanınca
     $('.list-group-item').on('click', function(event) {
       event.preventDefault();
@@ -18,7 +39,7 @@ $(document).ready(function() {
     $(document).on('mousemove', function(event) {
       console.log('mousemove');
       $('.yemek-resim').each(function() {
-        if ($(this).data('selected') === "true") {
+        if ($(this).data('selected') === "true" && moveSwitch) {
             var x = event.pageX - ($(this).width() / 2);
             var y = event.pageY - ($(this).height() / 2);
             $(this).css({
@@ -37,11 +58,27 @@ $(document).ready(function() {
       if ($(this).data('selected') == "true") {
         $(this).css('border', 'none');
         $(this).data('selected', "false");
+        $('#selected-item-text').text("");
+        moveSwitch = false;
+        $("#move").addClass('btn-danger')
+        $("#move").removeClass('btn-success')
     } else {
         $(this).css('border', '1px solid green');
         $(this).data('selected', "true");
-
+        $('#selected-item-text').html($(this).attr('alt'));
     }
     });
-  
+    
+    $("#move").click(function() {
+      if(moveSwitch == false){
+        moveSwitch = true;
+        $("#move").removeClass('btn-danger')
+        $("#move").addClass('btn-success')
+      }
+      else{
+        moveSwitch = false;
+        $("#move").addClass('btn-danger')
+        $("#move").removeClass('btn-success')
+      }
+    });
   });
